@@ -4,6 +4,8 @@
 # @Author  : Thomas
 # @File    : receive.py
 """
+mq消费端手动ack,是保证可靠性消费的核心保障。
+
 问题：
 如果保证消费的消息不会丢失？
 basic_consume时设置no_ack=false(1.12默认时false），消费成功后回调函数里手动ack.
@@ -12,6 +14,10 @@ basic_consume时设置no_ack=false(1.12默认时false），消费成功后回调
 
 知识点：
 自动ack与手动ack
+
+注意：设置手动ack，如果没有执行ack，那么message会一直缓冲在队列中。
+
+手动ack的时候MQ服务宕机了，重启这不是会造成重复消费吗，MQ重复消费的问题如何破？
 """
 
 import pika
